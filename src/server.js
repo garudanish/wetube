@@ -1,23 +1,14 @@
-const express = require("express");
-const morgan = require("morgan");
+import express from "express";
+import morgan from "morgan";
+import globalRouter from "./routers/globalRouter";
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
 
 const PORT = 4000;
 
 const app = express();
 const logger = morgan("dev");
 app.use(logger);
-
-const globalRouter = express.Router();
-const userRouter = express.Router();
-const videoRouter = express.Router();
-
-const handleHome = (req, res) => res.send("Home");
-const handleEditUser = (req, res) => res.send("Edit user");
-const handlehWatchVideo = (req, res) => res.send("Watch video");
-
-globalRouter.get("/", handleHome);
-userRouter.get("/edit", handleEditUser);
-videoRouter.get("/watch", handlehWatchVideo);
 
 app.use("/", globalRouter);
 app.use("/videos", videoRouter);
